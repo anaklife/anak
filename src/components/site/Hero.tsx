@@ -12,7 +12,8 @@ const INTERVAL_MS = 5000;
 
 export function Hero() {
   const [index, setIndex] = useState(0);
-  const slide = HERO_SLIDES[index];
+  const slide = HERO_SLIDES[index] ?? HERO_SLIDES[0];
+  const aside = slide.aside;
 
   useEffect(() => {
     const media = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -111,7 +112,7 @@ export function Hero() {
           ) : null}
         </div>
 
-        {slide.aside ? (
+        {aside ? (
           <motion.aside
             key={`${slide.src}-aside`}
             className={`absolute ${slide.asidePos ?? "top-[28%] right-8 hidden w-[12rem] text-right lg:block"}`}
@@ -121,26 +122,26 @@ export function Hero() {
           >
             <p
               className={`font-black leading-[0.8] text-vino/25 ${
-                slide.aside.size === "lg"
+                aside.size === "lg"
                   ? "text-[clamp(6.5rem,11vw,10rem)]"
                   : "text-[clamp(2.8rem,4.4vw,4rem)]"
               }`}
             >
-              {slide.aside.index}
+              {aside.index}
             </p>
             <p
               className={`mt-3 font-bold tracking-[0.22em] text-malva uppercase ${
-                slide.aside.size === "lg" ? "text-lg" : "text-[11px]"
+                aside.size === "lg" ? "text-lg" : "text-[11px]"
               }`}
             >
-              {slide.aside.label}
+              {aside.label}
             </p>
-            <ul className={`mt-6 space-y-1.5 ${slide.aside.size === "lg" ? "mt-8 space-y-2" : ""}`}>
-              {slide.aside.words.map((word) => (
+            <ul className={`mt-6 space-y-1.5 ${aside.size === "lg" ? "mt-8 space-y-2" : ""}`}>
+              {aside.words.map((word) => (
                 <li
                   key={word}
                   className={`font-medium tracking-[0.16em] text-cacao uppercase ${
-                    slide.aside.size === "lg" ? "text-lg" : "text-[12px]"
+                    aside.size === "lg" ? "text-lg" : "text-[12px]"
                   }`}
                 >
                   {word}
