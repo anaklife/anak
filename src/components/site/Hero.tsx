@@ -5,15 +5,71 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { BrandFlor } from "@/components/site/BrandFlor";
 import { HeroTitle } from "@/components/site/HeroTitle";
-import { HERO_SLIDES } from "@/lib/media";
+import { HERO_SLIDES, type HeroAside, type HeroSlide } from "@/lib/media";
 
 const ease = [0.25, 0.46, 0.45, 0.94] as const;
 const INTERVAL_MS = 5000;
+const FIRST_SLIDE: HeroSlide = HERO_SLIDES[0];
+
+function HeroAsidePanel({
+  aside,
+  src,
+  asidePos,
+}: {
+  aside: HeroAside;
+  src: string;
+  asidePos?: string;
+}) {
+  const large = aside.size === "lg";
+
+  return (
+    <motion.aside
+      key={`${src}-aside`}
+      className={`absolute ${asidePos ?? "top-[28%] right-8 hidden w-[12rem] text-right lg:block"}`}
+      initial={{ y: 14, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.45, ease, delay: 0.08 }}
+    >
+      <p
+        className={`font-black leading-[0.8] text-vino/25 ${
+          large
+            ? "text-[clamp(6.5rem,11vw,10rem)]"
+            : "text-[clamp(2.8rem,4.4vw,4rem)]"
+        }`}
+      >
+        {aside.index}
+      </p>
+      <p
+        className={`mt-3 font-bold tracking-[0.22em] text-malva uppercase ${
+          large ? "text-lg" : "text-[11px]"
+        }`}
+      >
+        {aside.label}
+      </p>
+      <ul className={`mt-6 space-y-1.5 ${large ? "mt-8 space-y-2" : ""}`}>
+        {aside.words.map((word) => (
+          <li
+            key={word}
+            className={`font-medium tracking-[0.16em] text-cacao uppercase ${
+              large ? "text-lg" : "text-[12px]"
+            }`}
+          >
+            {word}
+          </li>
+        ))}
+      </ul>
+      <BrandFlor
+        tone="cacao"
+        size={110}
+        className="hero-flor mt-7 w-16 opacity-80 md:w-20"
+      />
+    </motion.aside>
+  );
+}
 
 export function Hero() {
   const [index, setIndex] = useState(0);
-  const slide = HERO_SLIDES[index] ?? HERO_SLIDES[0];
-  const aside = slide.aside;
+  const slide = HERO_SLIDES[index] ?? FIRST_SLIDE;
 
   useEffect(() => {
     const media = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -112,49 +168,11 @@ export function Hero() {
           ) : null}
         </div>
 
-        {aside ? (
-          <motion.aside
-            key={`${slide.src}-aside`}
-            className={`absolute ${slide.asidePos ?? "top-[28%] right-8 hidden w-[12rem] text-right lg:block"}`}
-            initial={{ y: 14, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.45, ease, delay: 0.08 }}
-          >
-            <p
-              className={`font-black leading-[0.8] text-vino/25 ${
-                aside.size === "lg"
-                  ? "text-[clamp(6.5rem,11vw,10rem)]"
-                  : "text-[clamp(2.8rem,4.4vw,4rem)]"
-              }`}
-            >
-              {aside.index}
-            </p>
-            <p
-              className={`mt-3 font-bold tracking-[0.22em] text-malva uppercase ${
-                aside.size === "lg" ? "text-lg" : "text-[11px]"
-              }`}
-            >
-              {aside.label}
-            </p>
-            <ul className={`mt-6 space-y-1.5 ${aside.size === "lg" ? "mt-8 space-y-2" : ""}`}>
-              {aside.words.map((word) => (
-                <li
-                  key={word}
-                  className={`font-medium tracking-[0.16em] text-cacao uppercase ${
-                    aside.size === "lg" ? "text-lg" : "text-[12px]"
-                  }`}
-                >
-                  {word}
-                </li>
-              ))}
-            </ul>
-            <BrandFlor
-              tone="cacao"
-              size={110}
-              className="hero-flor mt-7 w-16 opacity-80 md:w-20"
-            />
-          </motion.aside>
-        ) : null}
+        <HeroAsidePanel
+          aside={slide.aside}
+          src={slide.src}
+          asidePos={slide.asidePos}
+        />
       </div>
 
       <div className="absolute inset-x-0 bottom-6 z-10 flex justify-center gap-2">

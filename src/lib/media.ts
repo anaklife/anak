@@ -43,6 +43,13 @@ export const LOGOS = {
   barreFlor: "/brand/anak-barre-flor.png",
 } as const;
 
+export type HeroAside = {
+  index: string;
+  label: string;
+  words: readonly string[];
+  size: "md" | "lg";
+};
+
 export type HeroSlide = {
   src: string;
   width: number;
@@ -52,12 +59,7 @@ export type HeroSlide = {
   kicker?: string;
   line?: string;
   cta?: { href: string; label: string };
-  aside?: {
-    index: string;
-    label: string;
-    words: readonly string[];
-    size?: "md" | "lg";
-  };
+  aside: HeroAside;
 };
 
 export const HERO_SLIDES: HeroSlide[] = [
