@@ -37,15 +37,6 @@ yarn-error.log*
 # vercel
 .vercel
 
-# source footage (the site only serves public/videos/web)
-public/videos/*.MOV
-public/videos/calse evento/
-public/videos/clase aspiracional/
-public/videos/tallet matcha/
-public/videos/web/hero.mp4
-
-# typescript
-
 # typescript
 *.tsbuildinfo
 next-env.d.ts
