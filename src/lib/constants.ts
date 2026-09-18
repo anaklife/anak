@@ -8,7 +8,7 @@ export const SITE_NAME = "ANAK";
 export const SITE_TAGLINE = "Mueve. Habita. Balance.";
 
 export const SITE_DESCRIPTION =
-  "ANAK — coach de barré, movimiento y comunidad. Clases, eventos, matcha, retos y Balance Club.";
+  "ANAK — coach de barré, movimiento y comunidad. Clases, matcha, retos y Balance Club.";
 
 export const SITE_ROLE = "Coach de barré";
 

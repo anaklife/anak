@@ -26,7 +26,7 @@ export function CtaBand() {
               ¿Empezamos por una clase?
             </h2>
             <p className="font-serif mx-auto mt-4 max-w-md text-lg leading-8 text-hueso/85">
-              Clases, eventos, matcha, retos o Balance Club. Escríbeme para
+              Clases, matcha, retos o Balance Club. Escríbeme para
               cupos y fechas. El club no se publica como invite abierto.
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
@@ -35,12 +35,6 @@ export function CtaBand() {
                 className="rounded-full bg-hueso px-6 py-3 text-xs font-bold tracking-[0.16em] text-vino uppercase hover:bg-blanco"
               >
                 WhatsApp
-              </Link>
-              <Link
-                href="/eventos"
-                className="rounded-full border-2 border-hueso/50 px-6 py-3 text-xs font-bold tracking-[0.16em] uppercase hover:border-hueso"
-              >
-                Eventos
               </Link>
             </div>
           </div>

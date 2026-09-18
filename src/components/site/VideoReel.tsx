@@ -11,7 +11,7 @@ function ReelHeading() {
         En movimiento
       </p>
       <h2 className="mt-3 text-2xl font-black text-hueso uppercase md:text-4xl">
-        Cinco ritmos, un universo
+        Cuatro ritmos, un universo
       </h2>
     </>
   );

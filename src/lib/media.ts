@@ -90,7 +90,7 @@ export const HERO_SLIDES: HeroSlide[] = [
     asidePos:
       "top-[38%] left-[calc(50%+14.5rem)] hidden w-[16rem] text-left lg:block",
     kicker: "Universo ANAK",
-    line: "Cinco formas de habitar el cuerpo.",
+    line: "Cuatro formas de habitar el cuerpo.",
     cta: { href: "/#oferta", label: "Ver secciones" },
     aside: {
       index: "02",

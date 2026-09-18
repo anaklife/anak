@@ -6,6 +6,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     { url: siteUrl, lastModified: new Date() },
     { url: `${siteUrl}/tree`, lastModified: new Date() },
-    { url: `${siteUrl}/eventos`, lastModified: new Date() },
+    { url: `${siteUrl}/posturas`, lastModified: new Date() },
   ];
 }

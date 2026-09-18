@@ -36,9 +36,9 @@ export function About() {
             pose.
           </p>
           <p>
-            Alrededor de las clases creció un universo propio: eventos
-            especiales, talleres de matcha, retos Anak y Balance Club. Un
-            espacio para volver a ti, una y otra vez.
+            Alrededor de las clases creció un universo propio: talleres
+            de matcha, retos Anak y Balance Club. Un espacio para volver
+            a ti, una y otra vez.
           </p>
         </div>
         <div className="relative mt-8 h-20 w-48 overflow-hidden rounded-2xl">

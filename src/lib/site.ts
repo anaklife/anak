@@ -1,7 +1,7 @@
 import { LOGOS, PHOTOS, VIDEOS } from "@/lib/media";
 import { WHATSAPP_URL } from "@/lib/constants";
 
-/** Las cinco secciones de producto ANAK. Nav, marquee, homepage y reel salen de aquí. */
+/** Secciones públicas de ANAK. Nav, marquee, homepage y reel salen de aquí. */
 export const HOME_SECTIONS = [
   {
     id: "clases",
@@ -14,18 +14,6 @@ export const HOME_SECTIONS = [
     ctaHref: WHATSAPP_URL,
     image: PHOTOS.clases,
     video: VIDEOS.clases,
-  },
-  {
-    id: "eventos",
-    title: "Eventos especiales",
-    nav: "Eventos",
-    kicker: "Agenda",
-    body: "Encuentros puntuales fuera de la clase regular: movimiento, encuentro y fecha única.",
-    href: "/eventos",
-    cta: "Ver agenda",
-    ctaHref: "/eventos",
-    image: PHOTOS.eventoFiesta,
-    video: VIDEOS.eventos,
   },
   {
     id: "matcha",

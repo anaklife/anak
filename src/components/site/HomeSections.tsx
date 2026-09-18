@@ -21,17 +21,13 @@ export function HomeSections() {
           Oferta ANAK
         </p>
         <h2 className="mt-3 text-3xl font-black text-vino uppercase md:text-5xl">
-          Cinco formas de habitar
+          Cuatro formas de habitar
         </h2>
       </FadeUp>
 
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-6">
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {HOME_SECTIONS.map((section, i) => (
-          <FadeUp
-            key={section.id}
-            delay={i * 0.06}
-            className={i === 3 ? "lg:col-span-2 lg:col-start-2" : "lg:col-span-2"}
-          >
+          <FadeUp key={section.id} delay={i * 0.06}>
             <motion.article
               id={section.id}
               className="scroll-mt-24 overflow-hidden rounded-[1.6rem] bg-blanco"
