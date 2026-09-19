@@ -54,6 +54,9 @@ export type HeroSlide = {
   src: string;
   width: number;
   height: number;
+  srcMobile?: string;
+  widthMobile?: number;
+  heightMobile?: number;
   titlePos: string;
   asidePos?: string;
   kicker?: string;
@@ -85,6 +88,9 @@ export const HERO_SLIDES: HeroSlide[] = [
     src: PHOTOS.arabesque,
     width: 6000,
     height: 4000,
+    srcMobile: PHOTOS.balletBarre,
+    widthMobile: 4000,
+    heightMobile: 6000,
     titlePos:
       "bottom-24 left-6 sm:left-10 lg:bottom-auto lg:top-[20%] lg:left-16 xl:left-24",
     asidePos:

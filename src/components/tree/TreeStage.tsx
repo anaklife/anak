@@ -8,6 +8,7 @@ import { BrandFlor } from "@/components/site/BrandFlor";
 import { BrandLogo } from "@/components/site/BrandLogo";
 import { VideoReel } from "@/components/site/VideoReel";
 import { SITE_NAME, SITE_ROLE, SITE_TAGLINE } from "@/lib/constants";
+import { PHOTOS } from "@/lib/media";
 import {
   TREE_LINKS,
   TREE_PHOTO,
@@ -173,6 +174,58 @@ function SocialRow({
   );
 }
 
+function DesktopTreeCard({
+  title,
+  body,
+  href,
+  cta,
+  image,
+  external,
+  i,
+  reduce,
+}: {
+  title: string;
+  body: string;
+  href: string;
+  cta: string;
+  image: string;
+  external?: boolean;
+  i: number;
+  reduce: boolean | null;
+}) {
+  return (
+    <motion.a
+      href={href}
+      {...(external ? { target: "_blank", rel: "noreferrer" } : {})}
+      className="relative flex min-h-[10.75rem] overflow-hidden rounded-[1.6rem] ring-1 ring-arena/25"
+      initial={reduce ? false : { y: 18 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.5, delay: reduce ? 0 : 0.12 + i * 0.06, ease }}
+    >
+      <Image
+        src={image}
+        alt=""
+        fill
+        sizes="42vw"
+        quality={80}
+        className="object-cover"
+      />
+      <div className="absolute inset-0 bg-negro/50" />
+      <div className="relative z-10 flex flex-1 flex-col justify-center px-8 py-6">
+        <h2 className="text-[clamp(1.6rem,2.4vw,2.15rem)] leading-[0.95] font-black tracking-tight text-blanco uppercase">
+          {title}
+        </h2>
+        <p className="mt-2 max-w-[32ch] text-sm leading-snug text-blanco/90">
+          {body}
+        </p>
+        <span className="mt-4 inline-flex w-fit rounded-full bg-hueso px-5 py-2 text-[13px] font-semibold tracking-tight text-cacao">
+          {cta}
+        </span>
+      </div>
+    </motion.a>
+  );
+}
+
 export function TreeStage() {
   const reduce = useReducedMotion();
   const sitio = TREE_LINKS.find((l) => l.id === "sitio")!;
@@ -182,7 +235,7 @@ export function TreeStage() {
 
   return (
     <div className="w-full bg-[#faf8f9] text-negro">
-      <div className="relative h-svh w-full overflow-hidden">
+      <div className="relative h-svh w-full overflow-hidden lg:hidden">
       <div className="absolute inset-0 z-0">
         <Image
           src={TREE_PHOTO_PORTRAIT.src}
@@ -192,30 +245,9 @@ export function TreeStage() {
           quality={90}
           loading="eager"
           fetchPriority="high"
-          className="object-cover object-right origin-right scale-[1.28] lg:hidden"
-        />
-        <Image
-          src={TREE_PHOTO.src}
-          alt="ANAK — coach de barré"
-          fill
-          sizes="100vw"
-          quality={90}
-          loading="eager"
-          fetchPriority="high"
-          className="hidden object-cover object-center lg:block"
+          className="object-cover object-right origin-right scale-[1.28]"
         />
       </div>
-
-      <BrandFlor
-        tone="arena"
-        size={180}
-        className="hero-flor animate-flor-spin pointer-events-none absolute top-8 left-[18%] hidden w-24 opacity-35 lg:block"
-      />
-      <BrandFlor
-        tone="cacao"
-        size={140}
-        className="hero-flor animate-flor-spin-rev pointer-events-none absolute right-[20%] bottom-10 hidden w-20 opacity-30 lg:block"
-      />
 
       <Link
         href="/"
@@ -225,38 +257,120 @@ export function TreeStage() {
         <BrandLogo preload className="h-11 w-auto sm:h-14" />
       </Link>
 
-      <div className="pointer-events-none absolute inset-x-0 top-16 z-10 px-5 text-center lg:inset-auto lg:top-[50%] lg:left-[30%] lg:px-0 lg:text-left">
-        <p className="text-[10px] font-bold tracking-[0.22em] text-malva uppercase lg:text-[11px]">
+      <div className="pointer-events-none absolute inset-x-0 top-16 z-10 px-5 text-center">
+        <p className="text-[10px] font-bold tracking-[0.22em] text-malva uppercase">
           {SITE_ROLE}
         </p>
-        <p className="mt-1 max-w-[16ch] font-black tracking-tight text-negro uppercase max-lg:mx-auto text-[clamp(2rem,10.5vw,3.6rem)] leading-[0.92] lg:max-w-[12ch]">
+        <p className="mt-1 max-w-[16ch] font-black tracking-tight text-negro uppercase max-lg:mx-auto text-[clamp(2rem,10.5vw,3.6rem)] leading-[0.92]">
           {SITE_TAGLINE}
         </p>
       </div>
 
-      <div className="absolute top-[58%] right-4 left-[32%] z-20 flex flex-col gap-2.5 lg:hidden">
+      <div className="absolute top-[58%] right-4 left-[32%] z-20 flex flex-col gap-2.5">
         <TreeButton link={posturas} i={0} reduce={reduce} compact />
         <TreeButton link={experiencia} i={1} reduce={reduce} compact />
         <TreeButton link={sitio} i={2} reduce={reduce} compact />
         <TreeButton link={whatsapp} i={3} reduce={reduce} compact />
         <SocialRow reduce={reduce} align="center" />
       </div>
-
-      <div className="pointer-events-none absolute inset-0 z-20 hidden lg:block">
-        <div className="pointer-events-auto absolute top-[40%] left-[3%] flex w-[17.5rem] flex-col gap-3">
-          <TreeButton link={sitio} i={0} reduce={reduce} />
-          <SocialRow reduce={reduce} align="start" />
-        </div>
-        <div className="pointer-events-auto absolute top-[16%] right-[4%] w-[17.5rem]">
-          <TreeButton link={experiencia} i={1} reduce={reduce} />
-        </div>
-        <div className="pointer-events-auto absolute top-[32%] right-[4%] w-[17.5rem]">
-          <TreeButton link={posturas} i={2} reduce={reduce} />
-        </div>
-        <div className="pointer-events-auto absolute top-[48%] right-[4%] w-[17.5rem]">
-          <TreeButton link={whatsapp} i={3} reduce={reduce} />
-        </div>
       </div>
+
+      <div className="relative hidden min-h-svh w-full overflow-hidden lg:block">
+        <BrandFlor
+          tone="arena"
+          size={180}
+          className="hero-flor animate-flor-spin pointer-events-none absolute top-16 left-8 w-24 opacity-35"
+        />
+        <BrandFlor
+          tone="cacao"
+          size={160}
+          className="hero-flor animate-flor-spin-rev pointer-events-none absolute top-24 right-10 w-20 opacity-30"
+        />
+        <BrandFlor
+          tone="arena"
+          size={140}
+          className="hero-flor animate-flor-drift pointer-events-none absolute bottom-16 left-[28%] w-16 opacity-25"
+        />
+        <BrandFlor
+          tone="cacao"
+          size={140}
+          className="hero-flor animate-flor-spin pointer-events-none absolute right-[22%] bottom-10 w-20 opacity-30"
+        />
+
+        <Link
+          href="/"
+          aria-label={`${SITE_NAME} — ir al sitio`}
+          className="absolute top-5 left-1/2 z-20 -translate-x-1/2"
+        >
+          <BrandLogo preload className="h-14 w-auto" />
+        </Link>
+
+        <div className="mx-auto flex min-h-svh max-w-6xl items-center gap-14 px-10 pt-24 pb-12">
+          <div className="w-[21rem] shrink-0">
+            <div className="bg-blanco p-3 shadow-[0_18px_40px_rgba(81,59,46,0.12)] ring-1 ring-arena/25">
+              <div className="relative aspect-[4/5] overflow-hidden">
+                <Image
+                  src={TREE_PHOTO.src}
+                  alt="ANAK — coach de barré"
+                  fill
+                  sizes="21rem"
+                  quality={90}
+                  className="origin-center scale-[1.85] object-cover object-center"
+                />
+              </div>
+            </div>
+            <p className="mt-6 text-center text-[11px] font-bold tracking-[0.22em] text-malva uppercase">
+              {SITE_ROLE}
+            </p>
+            <p className="mt-2 text-center font-black tracking-tight text-negro uppercase text-[clamp(1.7rem,2.6vw,2.45rem)] leading-[0.92]">
+              {SITE_TAGLINE}
+            </p>
+            <div className="mt-5">
+              <SocialRow reduce={reduce} align="center" />
+            </div>
+            <div className="mt-4 flex justify-center">
+              <a
+                href={whatsapp.href}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={`${whatsapp.label}. ${whatsapp.note}`}
+                className="grid h-12 w-12 place-items-center text-cacao hover:text-vino"
+              >
+                <WhatsappLogo className="h-7 w-7 fill-current" />
+              </a>
+            </div>
+          </div>
+
+          <div className="flex min-w-0 flex-1 flex-col gap-5">
+            <DesktopTreeCard
+              title={experiencia.label}
+              body="Lo que se siente estar aquí: presencia, guía, encuentro y ritual."
+              href={experiencia.href}
+              cta="Ver experiencias"
+              image={PHOTOS.presencia}
+              i={0}
+              reduce={reduce}
+            />
+            <DesktopTreeCard
+              title={posturas.label}
+              body="Una práctica para empezar el día, con fuerza y sin prisa."
+              href={posturas.href}
+              cta="Ver posturas"
+              image={PHOTOS.mat}
+              i={1}
+              reduce={reduce}
+            />
+            <DesktopTreeCard
+              title={sitio.label}
+              body="Clases, matcha, retos y Balance Club. El universo ANAK."
+              href={sitio.href}
+              cta="Ir al sitio"
+              image={PHOTOS.clases}
+              i={2}
+              reduce={reduce}
+            />
+          </div>
+        </div>
       </div>
 
       <div className="relative z-10 -mt-px">

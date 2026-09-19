@@ -32,16 +32,33 @@ export function Navbar() {
 
         <button
           type="button"
-          className="text-xs font-bold tracking-[0.16em] text-vino uppercase md:hidden"
+          className="flex h-10 w-10 items-center justify-center text-vino md:hidden"
           onClick={() => setOpen((v) => !v)}
           aria-expanded={open}
+          aria-label={open ? "Cerrar menú" : "Abrir menú"}
         >
-          {open ? "Cerrar" : "Menú"}
+          <span className="relative block h-3.5 w-5">
+            <span
+              className={`absolute left-0 h-[1.5px] w-full bg-current transition ${
+                open ? "top-1.5 rotate-45" : "top-0"
+              }`}
+            />
+            <span
+              className={`absolute top-1.5 left-0 h-[1.5px] w-full bg-current transition ${
+                open ? "opacity-0" : "opacity-100"
+              }`}
+            />
+            <span
+              className={`absolute left-0 h-[1.5px] w-full bg-current transition ${
+                open ? "top-1.5 -rotate-45" : "top-3"
+              }`}
+            />
+          </span>
         </button>
       </div>
 
       {open ? (
-        <nav className="grid gap-3 border-t border-arena/40 px-5 py-4 text-xs font-semibold tracking-[0.14em] text-negro uppercase md:hidden">
+        <nav className="grid justify-items-center gap-3 border-t border-arena/40 px-5 py-4 text-center text-xs font-semibold tracking-[0.14em] text-negro uppercase md:hidden">
           {NAV_ITEMS.map((item) => (
             <Link key={item.href} href={item.href} className="py-1" onClick={() => setOpen(false)}>
               {item.label}

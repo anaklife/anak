@@ -4,7 +4,11 @@ export function Marquee({ reverse = false }: { reverse?: boolean }) {
   const items = [...MARQUEE_ITEMS, ...MARQUEE_ITEMS, ...MARQUEE_ITEMS];
 
   return (
-    <div className={`overflow-hidden py-3.5 ${reverse ? "bg-vino" : "bg-blanco"}`}>
+    <div
+      className={`relative z-10 overflow-hidden py-3.5 ${
+        reverse ? "bg-vino" : "bg-blanco"
+      }`}
+    >
       <div
         className={`flex w-max gap-10 whitespace-nowrap ${
           reverse ? "animate-marquee-reverse" : "animate-marquee"

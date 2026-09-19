@@ -8,7 +8,7 @@ import { HeroTitle } from "@/components/site/HeroTitle";
 import { HERO_SLIDES, type HeroAside, type HeroSlide } from "@/lib/media";
 
 const ease = [0.25, 0.46, 0.45, 0.94] as const;
-const INTERVAL_MS = 5000;
+const INTERVAL_MS = 10000;
 const FIRST_SLIDE: HeroSlide = HERO_SLIDES[0];
 
 function HeroAsidePanel({
@@ -68,10 +68,14 @@ function HeroAsidePanel({
 }
 
 export function Hero() {
-  const [index, setIndex] = useState(0);
+  const [index, setIndex] = useState(1);
   const slide = HERO_SLIDES[index] ?? FIRST_SLIDE;
 
   useEffect(() => {
+    if (window.matchMedia("(min-width: 768px)").matches) {
+      setIndex(0);
+    }
+
     const media = window.matchMedia("(prefers-reduced-motion: reduce)");
     if (media.matches) return;
 
@@ -83,38 +87,194 @@ export function Hero() {
   }, []);
 
   return (
-    <section className="hero-studio relative isolate min-h-[92vh] overflow-hidden">
+    <section
+      className={`hero-studio relative isolate overflow-hidden md:min-h-[92vh] ${
+        slide.srcMobile ? "max-md:-mb-36" : ""
+      }`}
+    >
       <div
-        className="absolute inset-0"
+        className={
+          slide.srcMobile
+            ? "relative h-[68vh] overflow-hidden md:absolute md:inset-0 md:h-auto md:overflow-visible"
+            : "relative aspect-[2/3] overflow-hidden md:absolute md:inset-0 md:h-auto md:aspect-auto md:overflow-visible"
+        }
         role="region"
         aria-roledescription="carrusel"
         aria-label="Fotos ANAK"
       >
+        <div
+          className={
+            slide.srcMobile
+              ? "absolute inset-0 -translate-y-14 md:translate-y-0"
+              : "absolute inset-0"
+          }
+        >
         {HERO_SLIDES.map((item, i) => (
           <div
             key={item.src}
-            className={`absolute inset-0 flex items-center justify-center transition-opacity duration-700 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] ${
+            className={`absolute inset-0 z-0 flex items-start justify-center md:items-center transition-opacity duration-700 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] ${
               i === index ? "opacity-100" : "opacity-0"
             }`}
           >
-            <Image
-              src={item.src}
-              alt={i === index ? "ANAK — coach de barré" : ""}
-              width={item.width}
-              height={item.height}
-              preload={i === 0}
-              quality={90}
-              sizes="100vw"
-              className="hero-photo hero-photo-blend"
-            />
+            {item.srcMobile ? (
+              <>
+                <Image
+                  src={item.srcMobile}
+                  alt={i === index ? "ANAK — coach de barré" : ""}
+                  width={item.widthMobile ?? item.width}
+                  height={item.heightMobile ?? item.height}
+                  preload={i === 0}
+                  quality={90}
+                  sizes="100vw"
+                  className="hero-photo hero-photo-barre md:hidden"
+                />
+                <Image
+                  src={item.src}
+                  alt={i === index ? "ANAK — coach de barré" : ""}
+                  width={item.width}
+                  height={item.height}
+                  quality={90}
+                  sizes="100vw"
+                  className="hero-photo hero-photo-blend hidden md:block"
+                />
+              </>
+            ) : (
+              <Image
+                src={item.src}
+                alt={i === index ? "ANAK — coach de barré" : ""}
+                width={item.width}
+                height={item.height}
+                preload={i === 0}
+                quality={90}
+                sizes="100vw"
+                className="hero-photo hero-photo-blend"
+              />
+            )}
           </div>
         ))}
+
+        <div
+          className={`pointer-events-none absolute inset-x-0 z-20 px-5 md:hidden ${
+            slide.srcMobile ? "top-[12%]" : "top-[8%]"
+          }`}
+        >
+          <div key={`${slide.src}-top`}>
+            {slide.srcMobile && slide.kicker ? (
+              <motion.p
+                className="mb-0.5 text-[11px] font-bold tracking-[0.22em] text-malva uppercase"
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, ease }}
+              >
+                {slide.kicker}
+              </motion.p>
+            ) : null}
+            {slide.srcMobile ? (
+              <HeroTitle
+                replayKey={`${slide.src}-m`}
+                variant="centro"
+                className="max-w-none text-[clamp(2.6rem,11vw,3.25rem)] leading-[0.84] font-black tracking-tight text-vino uppercase"
+              />
+            ) : (
+              <h1 className="whitespace-nowrap text-[clamp(1.55rem,7.2vw,2.35rem)] leading-none font-black tracking-tight text-vino uppercase">
+                Entrena tu templo
+              </h1>
+            )}
+          </div>
+        </div>
+
+        {slide.srcMobile ? (
+          <>
+            <div className="pointer-events-none absolute top-[65%] left-5 z-20 md:hidden">
+              <div key={`${slide.src}-knee`}>
+                {slide.line ? (
+                  <motion.p
+                    className="max-w-[16ch] text-[0.95rem] font-medium tracking-[0.06em] text-cacao"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.45, delay: 0.55, ease }}
+                  >
+                    {slide.line}
+                  </motion.p>
+                ) : null}
+                {slide.cta ? (
+                  <motion.a
+                    href={slide.cta.href}
+                    className="pointer-events-auto mt-3 inline-block rounded-full bg-vino px-5 py-2.5 text-[11px] font-bold tracking-[0.16em] text-hueso uppercase hover:bg-negro"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.45, delay: 0.7, ease }}
+                  >
+                    {slide.cta.label}
+                  </motion.a>
+                ) : null}
+              </div>
+            </div>
+            <div className="pointer-events-auto absolute inset-x-0 top-[86%] z-20 flex justify-center gap-2 md:hidden">
+              {HERO_SLIDES.map((item, i) => (
+                <button
+                  key={`m-${item.src}`}
+                  type="button"
+                  aria-label={`Ver foto ${i + 1}`}
+                  aria-current={i === index ? true : undefined}
+                  onClick={() => setIndex(i)}
+                  className={`h-2 rounded-full transition-all ${
+                    i === index ? "w-6 bg-vino" : "w-2 bg-vino/30 hover:bg-vino/70"
+                  }`}
+                />
+              ))}
+            </div>
+          </>
+        ) : (
+          <>
+            <BrandFlor
+              tone="arena"
+              size={180}
+              className="hero-flor animate-flor-spin pointer-events-none absolute top-[54%] left-1 z-10 w-[5.5rem] opacity-80 md:hidden"
+            />
+            <BrandFlor
+              tone="cacao"
+              size={150}
+              className="hero-flor animate-flor-spin-rev pointer-events-none absolute top-[66%] left-8 z-10 w-[4.25rem] opacity-70 md:hidden"
+            />
+            <div className="pointer-events-auto absolute inset-x-0 bottom-3 z-20 flex justify-center gap-2 md:hidden">
+              {HERO_SLIDES.map((item, i) => (
+                <button
+                  key={`m1-${item.src}`}
+                  type="button"
+                  aria-label={`Ver foto ${i + 1}`}
+                  aria-current={i === index ? true : undefined}
+                  onClick={() => setIndex(i)}
+                  className={`h-2 rounded-full transition-all ${
+                    i === index ? "w-6 bg-vino" : "w-2 bg-vino/30 hover:bg-vino/70"
+                  }`}
+                />
+              ))}
+            </div>
+          </>
+        )}
+
+        <div className="absolute inset-x-0 bottom-6 z-20 hidden justify-center gap-2 md:flex">
+          {HERO_SLIDES.map((item, i) => (
+            <button
+              key={item.src}
+              type="button"
+              aria-label={`Ver foto ${i + 1}`}
+              aria-current={i === index ? true : undefined}
+              onClick={() => setIndex(i)}
+              className={`h-2 rounded-full transition-all ${
+                i === index ? "w-6 bg-vino" : "w-2 bg-vino/30 hover:bg-vino/70"
+              }`}
+            />
+          ))}
+        </div>
+        </div>
       </div>
 
       <BrandFlor
         tone="cacao"
         size={220}
-        className="hero-flor animate-flor-spin pointer-events-none absolute top-4 left-1 z-10 w-24 opacity-80 sm:top-6 sm:left-3 sm:w-36 md:w-44"
+        className="hero-flor animate-flor-spin pointer-events-none absolute top-4 left-1 z-10 hidden w-24 opacity-80 sm:top-6 sm:left-3 sm:w-36 md:block md:w-44"
       />
       <BrandFlor
         tone="arena"
@@ -124,7 +284,7 @@ export function Hero() {
       <BrandFlor
         tone="arena"
         size={160}
-        className="hero-flor animate-flor-drift pointer-events-none absolute bottom-20 left-2 z-10 w-16 opacity-70 sm:left-8 sm:w-24 md:w-28"
+        className="hero-flor animate-flor-drift pointer-events-none absolute bottom-20 left-2 z-10 hidden w-16 opacity-70 sm:left-8 sm:w-24 md:block md:w-28"
       />
       <BrandFlor
         tone="cacao"
@@ -132,7 +292,7 @@ export function Hero() {
         className="hero-flor animate-flor-spin pointer-events-none absolute right-3 bottom-24 z-10 hidden w-24 opacity-70 sm:block md:right-8 md:w-32"
       />
 
-      <div className="pointer-events-none relative z-10 min-h-[92vh]">
+      <div className="pointer-events-none relative z-10 hidden min-h-[92vh] md:block">
         <div key={slide.src} className={`absolute ${slide.titlePos}`}>
           {slide.kicker ? (
             <motion.p
@@ -173,21 +333,6 @@ export function Hero() {
           src={slide.src}
           asidePos={slide.asidePos}
         />
-      </div>
-
-      <div className="absolute inset-x-0 bottom-6 z-10 flex justify-center gap-2">
-        {HERO_SLIDES.map((item, i) => (
-          <button
-            key={item.src}
-            type="button"
-            aria-label={`Ver foto ${i + 1}`}
-            aria-current={i === index ? true : undefined}
-            onClick={() => setIndex(i)}
-            className={`h-2 rounded-full transition-all ${
-              i === index ? "w-6 bg-vino" : "w-2 bg-vino/30 hover:bg-vino/70"
-            }`}
-          />
-        ))}
       </div>
     </section>
   );

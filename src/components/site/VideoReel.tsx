@@ -7,7 +7,7 @@ import { FadeUp } from "@/components/ui/FadeUp";
 function ReelHeading() {
   return (
     <>
-      <p className="text-[11px] font-bold tracking-[0.28em] text-malva uppercase">
+      <p className="text-[11px] font-bold tracking-[0.28em] text-hueso uppercase">
         En movimiento
       </p>
       <h2 className="mt-3 text-2xl font-black text-hueso uppercase md:text-4xl">
@@ -53,11 +53,11 @@ function ReelCard({
 
 export function VideoReel({ instant = false }: { instant?: boolean } = {}) {
   return (
-    <section className="relative overflow-hidden bg-negro py-12">
+    <section className="relative overflow-hidden bg-malva py-12">
       <BrandFlor
         tone="hueso"
         size={120}
-        className="animate-flor-spin pointer-events-none absolute top-2 left-4 w-14 opacity-20"
+        className="animate-flor-spin pointer-events-none absolute top-2 left-4 w-14 opacity-30"
       />
       {instant ? (
         <div className="relative mb-8 px-5 text-center">
