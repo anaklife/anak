@@ -7,7 +7,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { BrandFlor } from "@/components/site/BrandFlor";
 import { BrandLogo } from "@/components/site/BrandLogo";
 import { VideoReel } from "@/components/site/VideoReel";
-import { SITE_NAME, SITE_ROLE, SITE_TAGLINE } from "@/lib/constants";
+import { SITE_NAME, SITE_ROLE } from "@/lib/constants";
 import { PHOTOS } from "@/lib/media";
 import {
   TREE_LINKS,
@@ -261,8 +261,9 @@ export function TreeStage() {
         <p className="text-[10px] font-bold tracking-[0.22em] text-malva uppercase">
           {SITE_ROLE}
         </p>
-        <p className="mt-1 max-w-[16ch] font-black tracking-tight text-negro uppercase max-lg:mx-auto text-[clamp(2rem,10.5vw,3.6rem)] leading-[0.92]">
-          {SITE_TAGLINE}
+        <p className="mx-auto mt-1 max-w-[12em] font-black tracking-tight text-negro uppercase text-[clamp(1.65rem,8.4vw,2.8rem)] leading-[0.92]">
+          Entrena y recuerda
+          <span className="block">quién eres</span>
         </p>
       </div>
 
@@ -322,8 +323,9 @@ export function TreeStage() {
             <p className="mt-6 text-center text-[11px] font-bold tracking-[0.22em] text-malva uppercase">
               {SITE_ROLE}
             </p>
-            <p className="mt-2 text-center font-black tracking-tight text-negro uppercase text-[clamp(1.7rem,2.6vw,2.45rem)] leading-[0.92]">
-              {SITE_TAGLINE}
+            <p className="mx-auto mt-2 max-w-[12em] text-center font-black tracking-tight text-negro uppercase text-[clamp(1.45rem,2.2vw,2.1rem)] leading-[0.92]">
+              Entrena y recuerda
+              <span className="block">quién eres</span>
             </p>
             <div className="mt-5">
               <SocialRow reduce={reduce} align="center" />
