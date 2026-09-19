@@ -235,7 +235,7 @@ export function TreeStage() {
 
   return (
     <div className="w-full bg-[#faf8f9] text-negro">
-      <div className="relative h-svh w-full overflow-hidden lg:hidden">
+      <div className="relative flex min-h-svh w-full flex-col overflow-x-hidden overflow-y-auto lg:hidden">
       <div className="absolute inset-0 z-0">
         <Image
           src={TREE_PHOTO_PORTRAIT.src}
@@ -252,12 +252,12 @@ export function TreeStage() {
       <Link
         href="/"
         aria-label={`${SITE_NAME} — ir al sitio`}
-        className="absolute top-3 left-1/2 z-20 -translate-x-1/2"
+        className="relative z-20 mx-auto mt-[max(0.75rem,env(safe-area-inset-top))]"
       >
         <BrandLogo preload className="h-11 w-auto sm:h-14" />
       </Link>
 
-      <div className="pointer-events-none absolute inset-x-0 top-16 z-10 px-5 text-center">
+      <div className="pointer-events-none relative z-10 mt-4 px-5 text-center">
         <p className="text-[10px] font-bold tracking-[0.22em] text-malva uppercase">
           {SITE_ROLE}
         </p>
@@ -267,7 +267,7 @@ export function TreeStage() {
         </p>
       </div>
 
-      <div className="absolute top-[58%] right-4 left-[32%] z-20 flex flex-col gap-2.5">
+      <div className="relative z-20 mt-auto flex flex-col gap-2.5 pr-[max(1rem,env(safe-area-inset-right))] pb-[max(1rem,env(safe-area-inset-bottom),calc(var(--safari-chrome-bottom,0px)+0.75rem))] pl-[32%]">
         <TreeButton link={posturas} i={0} reduce={reduce} compact />
         <TreeButton link={experiencia} i={1} reduce={reduce} compact />
         <TreeButton link={sitio} i={2} reduce={reduce} compact />
@@ -276,7 +276,7 @@ export function TreeStage() {
       </div>
       </div>
 
-      <div className="relative hidden min-h-svh w-full overflow-hidden lg:block">
+      <div className="relative hidden min-h-svh w-full overflow-x-hidden overflow-y-auto lg:block">
         <BrandFlor
           tone="arena"
           size={180}

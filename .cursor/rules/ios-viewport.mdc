@@ -1,0 +1,22 @@
+---
+description: Evitar roturas de layout en iPhone Safari (vh, recortes, safe-area)
+globs: src/**/*.{tsx,css}
+alwaysApply: true
+---
+
+# iOS viewport — no repetir el bug del hero
+
+En iPhone Safari, `100vh` / `68vh` es más alto que lo visible. Un `-mb-36` + `translate` sobre esa altura tapa el pie de la foto y los dots. Chrome de Cursor no lo reproduce.
+
+## Prohibido
+- `vh` clásico para altura de hero, tree o recorte de foto (`h-[68vh]`, `min-h-[92vh]`, `100vh`)
+- Márgenes negativos (`-mb-*`) o `translate-y-*` para subir marquees/secciones encima de una imagen
+- Anclar overlays a `top`/`bottom` del viewport si la foto usa otro recorte
+- Tratar un screenshot de Cursor (390×844 sin chrome de Safari) como QA de iPhone
+
+## Obligatorio
+- Recorte móvil: `aspect-*` + `object-fit` / `object-position`. Overlay en % de **esa** caja.
+- Alturas de pantalla: `svh` o `dvh`, nunca `vh`
+- Fixed (WhatsApp) y bloques al borde: `env(safe-area-inset-*)` y `var(--safari-chrome-bottom)`
+- Si el contenido no cabe (SE, landscape): `overflow-y-auto`, no `overflow-hidden` que recorta botones
+- Verificar home, `/tree` y `/posturas`. No cambiar el hero de barre ni el desktop salvo el bug de viewport.

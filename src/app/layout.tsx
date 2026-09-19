@@ -1,5 +1,6 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Alegreya, Montserrat } from "next/font/google";
+import { ViewportSafe } from "@/components/site/ViewportSafe";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_TAGLINE } from "@/lib/constants";
 import "./globals.css";
 
@@ -16,6 +17,12 @@ const alegreya = Alegreya({
 });
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -48,7 +55,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="es"
       className={`${montserrat.variable} ${alegreya.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col bg-hueso text-negro">{children}</body>
+      <body className="flex min-h-full flex-col bg-hueso text-negro">
+        <ViewportSafe />
+        {children}
+      </body>
     </html>
   );
 }

@@ -4,7 +4,7 @@ export function ContactFloater() {
   return (
     <a
       href={WHATSAPP_URL}
-      className="fixed right-4 bottom-4 z-50 grid h-14 w-14 place-items-center rounded-full bg-[#25D366] shadow-lg hover:bg-[#1ebe57]"
+      className="fixed z-50 grid h-14 w-14 place-items-center rounded-full bg-[#25D366] shadow-lg hover:bg-[#1ebe57] right-[max(1rem,env(safe-area-inset-right))] bottom-[max(1rem,env(safe-area-inset-bottom),calc(var(--safari-chrome-bottom,0px)+1rem))]"
       aria-label="WhatsApp"
     >
       <svg

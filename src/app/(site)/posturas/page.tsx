@@ -22,7 +22,7 @@ function WhatsappMark() {
 
 export default function PosturasPage() {
   return (
-    <div className="relative overflow-x-hidden px-5 py-10 md:py-14">
+    <div className="relative overflow-x-hidden py-10 pl-[max(1.25rem,env(safe-area-inset-left))] pr-[max(1.25rem,env(safe-area-inset-right))] md:py-14">
       <PosturasBackdrop />
       <BrandFlor
         tone="cacao"

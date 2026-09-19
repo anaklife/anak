@@ -10,8 +10,8 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-arena/40 bg-hueso/55 backdrop-blur-md">
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-2.5">
+    <header className="sticky top-0 z-40 border-b border-arena/40 bg-hueso/55 pt-[env(safe-area-inset-top)] backdrop-blur-md">
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 py-2.5 pl-[max(1.25rem,env(safe-area-inset-left))] pr-[max(1.25rem,env(safe-area-inset-right))]">
         <Link href="/" className="flex items-center" onClick={() => setOpen(false)}>
           <BrandLogo preload className="h-11 w-auto sm:h-12" />
         </Link>
@@ -58,7 +58,7 @@ export function Navbar() {
       </div>
 
       {open ? (
-        <nav className="grid justify-items-center gap-3 border-t border-arena/40 px-5 py-4 text-center text-xs font-semibold tracking-[0.14em] text-negro uppercase md:hidden">
+        <nav className="grid justify-items-center gap-3 border-t border-arena/40 py-4 pl-[max(1.25rem,env(safe-area-inset-left))] pr-[max(1.25rem,env(safe-area-inset-right))] text-center text-xs font-semibold tracking-[0.14em] text-negro uppercase md:hidden">
           {NAV_ITEMS.map((item) => (
             <Link key={item.href} href={item.href} className="py-1" onClick={() => setOpen(false)}>
               {item.label}

@@ -38,7 +38,7 @@ export function Experiencia() {
   }, []);
 
   return (
-    <section id="experiencia" className="relative overflow-hidden px-5 py-20">
+    <section id="experiencia" className="relative overflow-hidden py-20 pl-[max(1.25rem,env(safe-area-inset-left))] pr-[max(1.25rem,env(safe-area-inset-right))]">
       <BrandFlor
         tone="cacao"
         size={140}

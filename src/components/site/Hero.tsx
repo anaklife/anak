@@ -87,28 +87,19 @@ export function Hero() {
   }, []);
 
   return (
-    <section
-      className={`hero-studio relative isolate overflow-hidden md:min-h-[92vh] ${
-        slide.srcMobile ? "max-md:-mb-36" : ""
-      }`}
-    >
+    <section className="hero-studio relative isolate overflow-hidden md:min-h-[92dvh]">
+      {/* Móvil: recorte por aspect-ratio, no por vh. No usar -mb ni translate para pegar marquees. */}
       <div
         className={
           slide.srcMobile
-            ? "relative h-[68vh] overflow-hidden md:absolute md:inset-0 md:h-auto md:overflow-visible"
+            ? "relative aspect-[3/4] overflow-hidden md:absolute md:inset-0 md:h-auto md:aspect-auto md:overflow-visible"
             : "relative aspect-[2/3] overflow-hidden md:absolute md:inset-0 md:h-auto md:aspect-auto md:overflow-visible"
         }
         role="region"
         aria-roledescription="carrusel"
         aria-label="Fotos ANAK"
       >
-        <div
-          className={
-            slide.srcMobile
-              ? "absolute inset-0 -translate-y-14 md:translate-y-0"
-              : "absolute inset-0"
-          }
-        >
+        <div className="absolute inset-0">
         {HERO_SLIDES.map((item, i) => (
           <div
             key={item.src}
@@ -154,7 +145,7 @@ export function Hero() {
         ))}
 
         <div
-          className={`pointer-events-none absolute inset-x-0 z-20 px-5 md:hidden ${
+          className={`pointer-events-none absolute inset-x-0 z-20 pl-[max(1.25rem,env(safe-area-inset-left))] pr-[max(1.25rem,env(safe-area-inset-right))] md:hidden ${
             slide.srcMobile ? "top-[12%]" : "top-[8%]"
           }`}
         >
@@ -173,7 +164,7 @@ export function Hero() {
               <HeroTitle
                 replayKey={`${slide.src}-m`}
                 variant="centro"
-                className="max-w-none text-[clamp(2.6rem,11vw,3.25rem)] leading-[0.84] font-black tracking-tight text-vino uppercase"
+                className="max-w-none text-[clamp(2.05rem,9.4vw,3rem)] leading-[0.84] font-black tracking-tight text-vino uppercase"
               />
             ) : (
               <h1 className="whitespace-nowrap text-[clamp(1.55rem,7.2vw,2.35rem)] leading-none font-black tracking-tight text-vino uppercase">
@@ -185,7 +176,7 @@ export function Hero() {
 
         {slide.srcMobile ? (
           <>
-            <div className="pointer-events-none absolute top-[65%] left-5 z-20 md:hidden">
+            <div className="pointer-events-none absolute top-[65%] left-[max(1.25rem,env(safe-area-inset-left))] z-20 md:hidden">
               <div key={`${slide.src}-knee`}>
                 {slide.line ? (
                   <motion.p
@@ -210,7 +201,7 @@ export function Hero() {
                 ) : null}
               </div>
             </div>
-            <div className="pointer-events-auto absolute inset-x-0 top-[86%] z-20 flex justify-center gap-2 md:hidden">
+            <div className="pointer-events-auto absolute inset-x-0 bottom-3 z-20 flex justify-center gap-2 md:hidden">
               {HERO_SLIDES.map((item, i) => (
                 <button
                   key={`m-${item.src}`}
@@ -292,7 +283,7 @@ export function Hero() {
         className="hero-flor animate-flor-spin pointer-events-none absolute right-3 bottom-24 z-10 hidden w-24 opacity-70 sm:block md:right-8 md:w-32"
       />
 
-      <div className="pointer-events-none relative z-10 hidden min-h-[92vh] md:block">
+      <div className="pointer-events-none relative z-10 hidden min-h-[92dvh] md:block">
         <div key={slide.src} className={`absolute ${slide.titlePos}`}>
           {slide.kicker ? (
             <motion.p

@@ -28,6 +28,16 @@ Marca de **Pilates / movimiento / bienestar** (Bogotá, Colombia, contexto latin
 ## Identidad
 Paleta oficial en `src/lib/brand.ts`. Logo, tipografías y fotos siguen pendientes.
 
+## Viewport / iOS (obligatorio)
+Safari de iPhone usa un `vh` más alto que la pantalla visible. Eso ya rompió el hero en producción.
+
+- Nunca `100vh` / `68vh` / `92vh` para recortar fotos o pantallas. Usar `svh`/`dvh` o `aspect-*`.
+- Nunca `-mb-*` ni `translate-Y` para “pegar” marquees o secciones encima de una foto.
+- Recortes de foto: `aspect-ratio` + `object-fit` + `object-position`. El overlay se ancla a la foto (`top-[12%]`), no al viewport.
+- `position: fixed` (WhatsApp) y fondos a pantalla completa: `env(safe-area-inset-*)` **y** `var(--safari-chrome-bottom)` (lo setea `ViewportSafe`). El safe-area no cubre la barra de Safari.
+- Un screenshot de Cursor / Chrome desktop no vale como prueba de iPhone.
+- Home, `/tree` y `/posturas` tienen que sobrevivir iPhone SE, iPhone con Dynamic Island y Safari con barras visibles.
+
 <!-- BEGIN:nextjs-agent-rules -->
 
 # This is NOT the Next.js you know

@@ -60,15 +60,15 @@ export function VideoReel({ instant = false }: { instant?: boolean } = {}) {
         className="animate-flor-spin pointer-events-none absolute top-2 left-4 w-14 opacity-30"
       />
       {instant ? (
-        <div className="relative mb-8 px-5 text-center">
+        <div className="relative mb-8 px-[max(1.25rem,env(safe-area-inset-left))] text-center pr-[max(1.25rem,env(safe-area-inset-right))]">
           <ReelHeading />
         </div>
       ) : (
-        <FadeUp className="relative mb-8 px-5 text-center">
+        <FadeUp className="relative mb-8 px-[max(1.25rem,env(safe-area-inset-left))] text-center pr-[max(1.25rem,env(safe-area-inset-right))]">
           <ReelHeading />
         </FadeUp>
       )}
-      <div className="overflow-x-auto px-5 pb-2">
+      <div className="overflow-x-auto pb-2 pl-[max(1.25rem,env(safe-area-inset-left))] pr-[max(1.25rem,env(safe-area-inset-right))]">
         <div className="mx-auto flex w-max justify-center gap-4">
           {HOME_SECTIONS.map((section, i) =>
             instant ? (

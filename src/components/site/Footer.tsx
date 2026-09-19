@@ -12,7 +12,7 @@ export function Footer() {
         size={160}
         className="animate-flor-spin absolute -right-6 -bottom-8 w-28 opacity-15 md:w-36"
       />
-      <div className="relative mx-auto flex max-w-6xl flex-col items-center gap-8 px-5 py-12 text-center md:flex-row md:items-end md:justify-between md:text-left">
+      <div className="relative mx-auto flex max-w-6xl flex-col items-center gap-8 py-12 pl-[max(1.25rem,env(safe-area-inset-left))] pr-[max(1.25rem,env(safe-area-inset-right))] pb-[max(3rem,env(safe-area-inset-bottom),calc(var(--safari-chrome-bottom,0px)+5.5rem))] text-center md:flex-row md:items-end md:justify-between md:text-left">
         <div className="flex flex-col items-center space-y-3 md:items-start">
           <BrandLogo variant="claro" className="h-12 w-auto sm:h-14" />
           <p className="text-xs font-medium tracking-wide text-hueso/70">
